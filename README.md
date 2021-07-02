@@ -59,12 +59,12 @@
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
 | postal_code | text       | null: false       |
-| prefecture  | text       | foreign_key: true |
-| city        | text       | foreign_key: true |
+| prefecture  | text       | null: false       |
+| city        | text       | null: false       |
 | cost        | text       | null: false       |
-| addresses   | text       | foreign_key: true |
-| building    | text       | foreign_key: true |
-| phone_number| text       | foreign_key: true |
+| addresses   | text       | null: false       |
+| building    | text       | null: false       |
+| phone_number| text       | null: false       |
 
 ### Association
 
