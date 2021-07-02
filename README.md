@@ -7,7 +7,10 @@
 | nickname           | string              | null: false             |
 | email              | string              | unique: true            |
 | encrypted_password | string              | null: false             |
-| name               | string              | null: false             |
+| first_name         | string              | null: false             |
+| family_name        | string              | null: false             |
+| first_name_kana    | string              | null: false             |
+| family_name_kana   | string              | null: false             |
 | user_birth_date    | text                | null: false             |
 
 ### Association
@@ -22,11 +25,11 @@
 | item_img              | text       | null: false       |
 | item_name             | text       | null: false       |
 | explain               | text       | null: false       |
-| category              | string     | null: false       |
-| item_status           | text       | null: false       |
-| delivery_charge       | text       | null: false       |
-| delivery_source_area  | text       | null: false       |
-| cost                  | text       | null: false       |
+| category_id           | integer    | null: false       |
+| item_status_id        | integer    | null: false       |
+| delivery_charge_id    | integer    | null: false       |
+| delivery_area_id      | integer    | null: false       |
+| cost_id               | integer    | null: false       |
 | comments              | text       | null: false       |
 | user_id               | references | foreign_key: true |
 
@@ -40,11 +43,6 @@
 
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
-| card_number           | text       | null: false       |
-| available_card        | text       | foreign_key: true |
-| card_exp_month        | text       | foreign_key: true |
-| card_exp_year         | text       | null: false       |
-| card_cvc              | text       | null: false       |
 | user_id               | references | foreign_key: true |
 | item_id               | references | foreign_key: true |
 
@@ -58,13 +56,13 @@
 
 | Column      | Type       | Options           |
 |-------------|------------|-------------------|
-| postal_code | text       | null: false       |
-| prefecture  | text       | null: false       |
-| city        | text       | null: false       |
-| cost        | text       | null: false       |
-| addresses   | text       | null: false       |
-| building    | text       | null: false       |
-| phone_number| text       | null: false       |
+| postal_code | string     | null: false       |
+| prefecture  | string     | null: false       |
+| city        | string     | null: false       |
+| cost        | string     | null: false       |
+| addresses   | string     | null: false       |
+| building    | string     |                   |
+| phone_number| string     | null: false       |
 
 ### Association
 
