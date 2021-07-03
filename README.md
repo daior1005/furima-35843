@@ -24,7 +24,7 @@
 |-----------------------|------------|-------------------|
 | item_name             | string     | null: false       |
 | explain               | text       | null: false       |
-| brand_id              | integer    | null: false       |
+| shipment_day          | integer    | null: false       |
 | category_id           | integer    | null: false       |
 | item_status_id        | integer    | null: false       |
 | delivery_charge_id    | integer    | null: false       |
