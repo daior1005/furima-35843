@@ -16,15 +16,15 @@
 ### Association
 
 * has_many :items
-* has_many :purchasess
+* has_many :purchases
 
 ## items テーブル
 
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
 | item_name             | string     | null: false       |
-| seller_name           | string     | null: false       |
 | explain               | text       | null: false       |
+| brand_id              | integer    | null: false       |
 | category_id           | integer    | null: false       |
 | item_status_id        | integer    | null: false       |
 | delivery_charge_id    | integer    | null: false       |
@@ -38,7 +38,7 @@
 - has_one :purchase
 - belongs_to :user
 
-## purchase テーブル
+## purchases テーブル
 
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
@@ -51,7 +51,6 @@
 - has_one :address
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
 
 ## address テーブル
 
