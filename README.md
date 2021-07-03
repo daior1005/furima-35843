@@ -5,7 +5,7 @@
 | Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
 | nickname           | string              | null: false             |
-| email              | string              | unique: true            |
+| email              | string              | unique: true, null: false|
 | encrypted_password | string              | null: false             |
 | first_name         | string              | null: false             |
 | family_name        | string              | null: false             |
@@ -16,13 +16,14 @@
 ### Association
 
 * has_many :items
-* has_many :purchase
+* has_many :purchasess
 
 ## items テーブル
 
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
 | item_name             | string     | null: false       |
+| seller_name           | string     | null: false       |
 | explain               | text       | null: false       |
 | category_id           | integer    | null: false       |
 | item_status_id        | integer    | null: false       |
@@ -34,18 +35,20 @@
 
 ### Association
 
+- has_one :purchase
 - belongs_to :user
 
 ## purchase テーブル
 
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
-| user_id               | references | foreign_key: true |
-| item_id               | references | foreign_key: true |
+| user                  | references | foreign_key: true |
+| item                  | references | foreign_key: true |
 
 
 ### Association
 
+- has_one :address
 - belongs_to :item
 - belongs_to :user
 - belongs_to :address
@@ -55,14 +58,12 @@
 | Column                | Type       | Options           |
 |-----------------------|------------|-------------------|
 | postal_code           | string     | null: false       |
-| delivery_charge_id    | integer    | null: false       |
 | delivery_area_id      | integer    | null: false       |
 | city                  | string     | null: false       |
-| cost                  | string     | null: false       |
 | addresses             | string     | null: false       |
 | building              | string     |                   |
 | phone_number          | string     | null: false       |
-
+| purchase              |references  |foreign_key: true  |
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
