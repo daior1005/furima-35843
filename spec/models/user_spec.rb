@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
     @user = Furima.build(:user)
   end
 
-
   describe 'ユーザー新規登録' do
     it 'nicknameが空だと登録できない' do
       user = User.new(nickname: '', email: 'kkk@gmail.com', password: '00000000', password_confirmation: '00000000')
@@ -16,7 +15,7 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors.full_messages).to include("Email can't be blank")
     end
-    
+
     it 'メールアドレスが一意性' do
       @user.save
       another_user = Furima.build(:user)
