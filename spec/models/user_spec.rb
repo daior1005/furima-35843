@@ -40,10 +40,28 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
     it 'パスワードとパスワード（確認）は、値の一致が必須' do
-      @user.password = '00000'
-      @user.password_confirmation = '00001'
+      @user.password = '000000'
+      @user.password_confirmation = '000001'
       @user.valid?
       expect(@user.errors.full_messages).to include('Password do not match)')
     end
+    it 'passwordの半角英語のみは登録できない' do
+    end
+    it 'passwordの数字のみは登録できない' do
+    end
+    it 'passwordの全角英数混合は登録できない' do
+    end
+    it '誕生日が空の場合は登録できない' do
+    end
+    it '姓が空の場合は登録できない' do
+    end
+  
+姓：全角（漢字・ひらがな・カタカナ）以外は登録できない
+名：空の場合は登録できない
+名：全角（漢字・ひらがな・カタカナ）以外は登録できない
+姓（フリガナ）：空の場合は登録できない
+姓（フリガナ）：全角（カタカナ）以外は登録できない
+名（フリガナ）：空の場合は登録できない
+名（フリガナ）：全角（カタカナ）以外は登録できない
   end
 end
