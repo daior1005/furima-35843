@@ -6,5 +6,6 @@ class User < ApplicationRecord
   # has_many :items
   # has_many :purchases
 
-  validates :nickname, presence: true
+  validates :nickname, :password, :first_name, :family_name, :first_name_kana, :family_name_kana,
+  :birth_date presence: true
 end
