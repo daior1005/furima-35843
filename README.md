@@ -24,6 +24,7 @@
 |-----------------------|------------|-------------------|
 | item_name             | string     | null: false       |
 | explain               | text       | null: false       |
+<<<<<<< Updated upstream
 | shipment_day          | integer    | null: false       |
 | category_id           | integer    | null: false       |
 | item_status_id        | integer    | null: false       |
@@ -31,6 +32,15 @@
 | delivery_area_id      | integer    | null: false       |
 | cost                  | integer    | null: false       |
 | user                  | references | foreign_key: true |
+=======
+| category              | text       | null: false       |
+| item_status           | text       | null: false       |
+| delivery_charge       | text       | null: false       |
+| delivery_source_area  | text       | null: false       |
+| cost                  | text       | null: false       |
+| comments              | text       | null: false       |
+| user_id               | references | foreign_key: true |
+>>>>>>> Stashed changes
 
 
 ### Association
