@@ -12,18 +12,18 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGIX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGIX }
   
-  validates :first_name,
-            format: { with: /\A[ぁ-んァ-ン一-龥]/ },
-            presence: true
-  validates :family_name,
-            format: { with: /\A[ぁ-んァ-ン一-龥]/ },
-            presence: true
-  validates :first_name_kana,
-            format: { with: /\A[ァ-ヶー－]+\z/ },
-            presence: true
-  validates :family_name_kana,
-            format: { with: /\A[ァ-ヶー－]+\z/ },
-            presence: true
+  # 全角のひらがなor漢字を使用していないか検証
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
+    validates :family_name
+    validates :first_name
+  end
+
+  # 全角のカタカナを使用していないか検証
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }do
+    validates :family_name_kana
+    validates :first_name_kana
+  end
+
   validates :birth_date,
             presence: true
 end

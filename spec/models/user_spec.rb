@@ -47,14 +47,14 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'パスワードは、6文字以上での入力が必須' do
-        @user.password = '00000'
-        @user.password_confirmation = '00000'
+        @user.password = '11aaa'
+        @user.password_confirmation = '11aaa'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
       it 'パスワードとパスワード（確認）は、値の一致が必須' do
-        @user.password = '000000'
-        @user.password_confirmation = '000001'
+        @user.password = '000aaa'
+        @user.password_confirmation = '000aaa'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
