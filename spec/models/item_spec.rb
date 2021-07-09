@@ -60,7 +60,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Delivery area must be other than 1')
       end
       it 'shipment_day_idがないと出品できない' do
-        @item.shipment_day_id= 1
+        @item.shipment_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipment day must be other than 1')
       end
@@ -70,7 +70,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Cost can't be blank")
       end
       it 'costが300円以下だと出品できない' do
-        @item.cost= 299
+        @item.cost = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
@@ -80,19 +80,19 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
       it 'costが半角数字でないと出品できない' do
-        @item.cost= '３００'
+        @item.cost = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
-      it "costが半角英数混合では登録できないこと" do
-        @item.cost = "300dollars"
+      it 'costが半角英数混合では登録できないこと' do
+        @item.cost = '300dollars'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Cost is not included in the list")
+        expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
-      it "costが半角英語だけでは登録できないこと" do
-        @item.cost = "threemillion"
+      it 'costが半角英語だけでは登録できないこと' do
+        @item.cost = 'threemillion'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Cost is not included in the list")
+        expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
     end
   end
