@@ -10,18 +10,6 @@ RSpec.describe Item, type: :model do
       it 'image,item_name,explain,category_id,item_status_id,delivery_charge_id,delivery_area_id,shipment_day_id,' do
         expect(@item).to be_valid
       end
-      it 'costが300円なら出品できる' do
-        @item.cost = 300
-        expect(@item).to be_valid
-      end
-      it 'costが9,999,999円なら出品できる' do
-        @item.cost = 9_999_999
-        expect(@item).to be_valid
-      end
-      it 'costが半角なら出品できる' do
-        @item.cost = 300
-        expect(@item).to be_valid
-      end
     end
     context '商品出品できないとき' do
       it 'imageがないと出品できない' do
