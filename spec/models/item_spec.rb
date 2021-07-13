@@ -57,7 +57,7 @@ RSpec.describe Item, type: :model do
       it 'delivery_area_idがないと出品できない' do
         @item.delivery_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include( "Delivery area can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery area can't be blank")
       end
       it 'shipment_day_idがないと出品できない' do
         @item.shipment_day_id = 1
@@ -87,7 +87,7 @@ RSpec.describe Item, type: :model do
       it 'costが半角英数混合では登録できないこと' do
         @item.cost = '300dollars'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Cost is not a number")
+        expect(@item.errors.full_messages).to include('Cost is not a number')
       end
       it 'costが半角英語だけでは登録できないこと' do
         @item.cost = 'threemillion'
