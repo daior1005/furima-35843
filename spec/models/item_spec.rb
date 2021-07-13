@@ -42,27 +42,27 @@ RSpec.describe Item, type: :model do
       it 'category_idがないと出品できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category must be other than 1')
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'item_status_idがないと出品できない' do
         @item.item_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Item status must be other than 1')
+        expect(@item.errors.full_messages).to include("Item status can't be blank")
       end
       it 'delivery_charge_idがないと出品できない' do
         @item.delivery_charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery charge must be other than 1')
+        expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
       end
       it 'delivery_area_idがないと出品できない' do
         @item.delivery_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery area must be other than 1')
+        expect(@item.errors.full_messages).to include( "Delivery area can't be blank")
       end
       it 'shipment_day_idがないと出品できない' do
         @item.shipment_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Shipment day must be other than 1')
+        expect(@item.errors.full_messages).to include("Shipment day can't be blank")
       end
       it 'costがないと出品できない' do
         @item.cost = ''
@@ -75,7 +75,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
       it 'costが9,999,999円以上だと出品できない' do
-        @item.price = 10_000_000
+        @item.cost = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Cost is not included in the list')
       end
@@ -87,7 +87,7 @@ RSpec.describe Item, type: :model do
       it 'costが半角英数混合では登録できないこと' do
         @item.cost = '300dollars'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Cost is not included in the list')
+        expect(@item.errors.full_messages).to include("Cost is not a number")
       end
       it 'costが半角英語だけでは登録できないこと' do
         @item.cost = 'threemillion'
