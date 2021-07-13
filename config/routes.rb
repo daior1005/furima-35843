@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'furimas/index'
-  root to: "furimas#index"
-  # resources :items, only: [:new, :create, :index, :show]
+  root to: "items#index"
 
-
+  resources :items, only: [:index, :new, :create] do
+  end
 end
