@@ -1,19 +1,33 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index, except: [:index, :show]
+
   def index
+    @items = Item.all
   end
 
   def new
-    @furima = Furima.new
+    @item = Item.new
   end
 
   def create
-    Furima.create(furima_params)
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
 
-  def furima_params
-    params.require(:item).permit(:item_name, :exlain, :shipment_day_id, :category_id, :item_status_id, :delivery_charge_id,
+  def move_to_index
+    unless user_signed_in?
+      redirect_to  new_user_session_path
+    end
+  end
+
+  def item_params
+    params.require(:item).permit(:item_name, :explain, :shipment_day_id, :category_id, :item_status_id, :delivery_charge_id,
                                  :delivery_area_id, :cost, :image).merge(user_id: current_user.id)
   end
 end
