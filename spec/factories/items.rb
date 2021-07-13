@@ -7,7 +7,7 @@ FactoryBot.define do
     item_status_id { 13 }
     delivery_charge_id { 2 }
     delivery_area_id { 2 }
-    cost { '9999' }
+    cost { 9999}
 
     # アソシエーション
     association :user
