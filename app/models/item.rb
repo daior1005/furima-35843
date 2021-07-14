@@ -23,5 +23,5 @@ class Item < ApplicationRecord
     validates :delivery_area_id
     validates :shipment_day_id
   end
-    validates :cost, numericality: true
+  validates :cost, numericality: true
 end
