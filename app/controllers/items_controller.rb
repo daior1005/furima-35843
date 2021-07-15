@@ -25,7 +25,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    # @item = Item.find(params[:id])
+    if @item.user == current_user
+      render "edit"
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -40,7 +44,7 @@ class ItemsController < ApplicationController
   private
 
   def set_user
-    @item = Item.find(params[:user_id])
+    @item = Item.find(params[:id])
   end
 
   def move_to_index
