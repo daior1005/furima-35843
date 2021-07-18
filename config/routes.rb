@@ -3,5 +3,10 @@ Rails.application.routes.draw do
   root to: "items#index"
 
   resources :items 
-  
+  resources :cards, only: [:index, :new, :create, :destroy] 
+  resources :posts do 
+  collection do 
+  post 'pay/:id'=>   'posts#pay' 
+  end 
+ end  
 end
