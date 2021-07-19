@@ -3,9 +3,7 @@ class CardsController < ApplicationController
   before_action :set_payjp_key, except: :new
 
   def index
-    if current_user.card.present?
-      @cards = Card.where(user_id: current_user.id)
-    end
+    @cards = Card.where(user_id: current_user.id) if current_user.card.present?
   end
 
   def new
@@ -33,5 +31,4 @@ class CardsController < ApplicationController
   def set_payjp_key
     Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
   end
-
 end
