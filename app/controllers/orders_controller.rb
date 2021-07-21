@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new(orders_params)
     @item = Item.find(params[:item_id])
     if @order_address.valid?
-      # pay_item
+      pay_item
       @order_address.save
       redirect_to root_path
     else
@@ -26,16 +26,16 @@ class OrdersController < ApplicationController
 
   def orders_params
     params.require(:order_address).permit(:post_code, :delivery_area_id, :city, :home_num, :building_name, :tel).merge(
-      user_id: current_user.id, item_id: params[:item_id]
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
 
-  # def pay_item
-  #   Payjp.api_key = "sk_test_ef625018ada88039426272b1"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
-  #   Payjp::Charge.create(
-  #     amount: order_params[:price],  # 商品の値段
-  #     card: order_params[:token],    # カードトークン
-  #     currency: 'jpy'                 # 通貨の種類（日本円）
-  #   )
-  # end
+  def pay_item
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: orders_params[:price],  # 商品の値段
+      card: orders_params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
+  end
 end
