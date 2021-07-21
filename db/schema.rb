@@ -35,15 +35,15 @@ ActiveRecord::Schema.define(version: 2021_07_19_075146) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "post_code", null: false
-    t.integer "prefecture_id", null: false
+    t.integer "delivery_area_id", null: false
     t.string "city", null: false
     t.string "home_num", null: false
     t.string "building_name"
     t.string "tel", null: false
-    t.bigint "orders_id", null: false
+    t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["orders_id"], name: "index_addresses_on_orders_id"
+    t.index ["order_id"], name: "index_addresses_on_order_id"
   end
 
   create_table "furimas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -67,14 +67,18 @@ ActiveRecord::Schema.define(version: 2021_07_19_075146) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "family_name", default: "", null: false
     t.string "first_name_kana", default: "", null: false
@@ -90,6 +94,6 @@ ActiveRecord::Schema.define(version: 2021_07_19_075146) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "addresses", "orders", column: "orders_id"
+  add_foreign_key "addresses", "orders"
   add_foreign_key "items", "users"
 end
