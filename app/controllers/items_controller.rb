@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :user_back, only: [:edit, :update]
+  before_action :set_furima, only: [:edit, :update, :destroy]
+  before_action :prevent_url, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -46,6 +48,14 @@ class ItemsController < ApplicationController
 
   def set_user
     @item = Item.find(params[:id])
+  end
+
+  def set_furima
+    @item = Item.find(params[:id])
+  end
+
+  def prevent_url
+    redirect_to root_path if @item.user_id != current_user.id || !@item.order.nil? # 　コードを追加
   end
 
   def item_params

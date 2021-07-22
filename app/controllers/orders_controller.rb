@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :move_to_signed_in, except: [:index]
+  before_action :set_furima, only: [:index, :create]
+  before_action :prevent_url, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -24,6 +27,21 @@ class OrdersController < ApplicationController
 
   private
 
+  def move_to_signed_in
+    unless user_signed_in?
+      # サインインしていないユーザーはログインページが表示される
+      redirect_to '/users/sign_in'
+    end
+  end
+
+  def set_furima
+    @item = Item.find(params[:item_id])
+  end
+
+  def prevent_url
+    redirect_to root_path if @item.user_id == current_user.id || !@item.order.nil?
+  end
+
   def orders_params
     params.require(:order_address).permit(:post_code, :delivery_area_id, :city, :home_num, :building_name, :tel).merge(
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
@@ -33,7 +51,7 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: orders_params[:price],  # 商品の値段
+      amount: @item.cost,
       card: orders_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
