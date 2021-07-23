@@ -21,6 +21,16 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it 'ユーザーのidが空だった場合購入できないこと' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it '商品のidが空だった場合購入できないこと' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
       it 'post_codeが空だと保存できないこと' do
         @order_address.post_code = ''
         @order_address.valid?
@@ -32,7 +42,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it 'delivery_areaを選択していないと保存できないこと' do
-        @order_address.delivery_area_id = '1'
+        @order_address.delivery_area_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Delivery area can't be blank")
       end
@@ -53,6 +63,11 @@ RSpec.describe OrderAddress, type: :model do
       end
       it 'telが半角のハイフンを含まない正しい形式でないと保存できないこと' do
         @order_address.tel = '123-456-7891'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Tel is invalid.')
+      end
+      it 'telが12桁以上では登録できないこと' do
+        @order_address.tel = '123456789101'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Tel is invalid.')
       end
