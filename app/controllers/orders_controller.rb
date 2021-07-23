@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :move_to_signed_in, except: [:index]
   before_action :set_furima, only: [:index, :create]
   before_action :prevent_url, only: [:index, :create]
+  before_action :sold_out_item, only: [:index]
 
   def index
     @item = Item.find(params[:item_id])
@@ -27,11 +28,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def move_to_signed_in
-    unless user_signed_in?
-      # サインインしていないユーザーはログインページが表示される
-      redirect_to '/users/sign_in'
-    end
+  def sold_out_item
+    redirect_to root_path if @item.present?
   end
 
   def set_furima

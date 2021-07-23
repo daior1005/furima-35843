@@ -50,10 +50,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def set_furima
-    @item = Item.find(params[:id])
-  end
-
   def prevent_url
     redirect_to root_path if @item.user_id != current_user.id || !@item.order.nil? # 　コードを追加
   end
