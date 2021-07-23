@@ -8,8 +8,6 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new
   end
 
- 
-
   def create
     @order_address = OrderAddress.new(orders_params)
     if @order_address.valid?
@@ -22,8 +20,6 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  
 
   def set_furima
     @item = Item.find(params[:item_id])
