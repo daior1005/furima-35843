@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
   before_action :sold_out_item, only: [:index]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
   end
 
@@ -16,7 +15,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(orders_params)
-    @item = Item.find(params[:item_id])
     if @order_address.valid?
       pay_item
       @order_address.save
