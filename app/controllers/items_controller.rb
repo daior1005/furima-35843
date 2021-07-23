@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :user_back, only: [:edit, :update]
-  before_action :set_furima, only: [:edit, :update, :destroy]
   before_action :prevent_url, only: [:edit, :update, :destroy]
 
   def index

@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :delivery_area_id, :city, :home_num, :building_name, :tel, :orders_id, :item_id, :token, :user_id
+  attr_accessor :post_code, :delivery_area_id, :city, :home_num, :building_name, :tel, :item_id, :token, :user_id
 
   with_options presence: true do
     # 数字3桁、ハイフン、数字4桁の並びのみ許可する

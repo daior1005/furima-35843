@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :move_to_signed_in, except: [:index]
   before_action :set_furima, only: [:index, :create]
   before_action :prevent_url, only: [:index, :create]
   before_action :sold_out_item, only: [:index]
@@ -9,9 +8,7 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new
   end
 
-  # def new
-  #   @order_address = OrderAddress.new
-  # end
+ 
 
   def create
     @order_address = OrderAddress.new(orders_params)
@@ -26,9 +23,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def sold_out_item
-    redirect_to root_path if @item.present?
-  end
+  
 
   def set_furima
     @item = Item.find(params[:item_id])
